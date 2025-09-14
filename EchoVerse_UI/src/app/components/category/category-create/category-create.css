@@ -1,0 +1,24 @@
+/* Match Music Create Style */
+.card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Gradient header same as music form */
+.gradient-color {
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+}
+
+/* Mobile responsive button layout */
+@media (max-width: 768px) {
+  .d-flex.gap-2 {
+    flex-direction: column;
+  }
+
+  .d-flex.gap-2 .btn {
+    width: 100%;
+  }
+}

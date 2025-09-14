@@ -1,0 +1,36 @@
+/* Music List Styles */
+.card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border-radius: 0.5rem;
+}
+.card-header { border-radius: 0.5rem 0.5rem 0 0 !important; }
+.table { margin-bottom: 0; }
+.table-hover tbody tr:hover { background-color: rgba(0, 0, 0, 0.075); }
+
+.btn-group .btn { transition: all 0.3s ease; }
+.btn-group .btn.gradient-color:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.badge { font-size: 0.75em; }
+.text-muted { color: #6c757d !important; }
+.display-1 { font-size: 6rem; opacity: 0.5; }
+
+@media (max-width: 768px) {
+  .table-responsive { font-size: 0.875rem; }
+  .btn-group .btn { padding: 0.25rem 0.5rem; font-size: 0.75rem; }
+  .display-1 { font-size: 4rem; }
+}
+
+.btn-outline-primary.gradient-color:hover {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-color: #007bff;
+  color: #fff;
+}
+.btn-outline-danger.gradient-color:hover {
+  background: linear-gradient(135deg, #dc3545, #b02a37);
+  border-color: #dc3545;
+  color: #fff;
+}

@@ -1,0 +1,27 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Year</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let m of musics; let i = index">
+      <td>{{ m.id }}</td>
+      <td>{{ m.title }}</td>
+      <td>{{ m.artist }}</td>
+      <td>{{ m.album || '-' }}</td>
+      <td>{{ m.releaseYear || '-' }}</td>
+      <td>{{ m.categoryName || 'No Category' }}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" (click)="editMusic.emit(m)">Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteMusicEvent.emit(m)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

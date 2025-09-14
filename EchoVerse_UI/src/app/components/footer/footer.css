@@ -1,0 +1,37 @@
+/* Make sure the body takes full height and content pushes footer down */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content area grows to push footer down */
+.container {
+  flex: 1;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #212529; /* Bootstrap dark background */
+  color: white;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 1rem;
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+  footer {
+    font-size: 0.9rem;
+    padding: 12px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    font-size: 0.8rem;
+    padding: 10px 6px;
+  }
+}

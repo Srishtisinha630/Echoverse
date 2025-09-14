@@ -1,0 +1,162 @@
+/* Global styles - Bootstrap 5 and animations only */
+
+/* Import Bootstrap 5 */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Import Bootstrap Icons from CDN */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
+
+/* Import Animate.css from CDN for animations */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Remove scrollbars globally */
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-background, .footer-background {
+  background-image: linear-gradient(to right, #064181, #4f6985);
+}
+
+.gradient-color {
+  /* The linear gradient background you requested */
+
+
+    background-image: linear-gradient(to right, #064181, #4f6985);
+
+ 
+
+  /* Set the text color to white for readability */
+  color: #fff;
+
+  /* Remove default button border */
+  border: none;
+
+  /* Optional: Add some padding for a better size */
+  padding: 10px 20px;
+
+  /* Optional: Change the cursor to a pointer on hover */
+  cursor: pointer;
+
+  /* Optional: Add a subtle border-radius for a softer look */
+  border-radius: 5px;
+
+  /* Optional: Add a smooth transition for hover effects */
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for gradient-color buttons */
+.btn.gradient-color:hover {
+  background-image: linear-gradient(to right, #052d5a, #3a4d5c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Active/pressed state for gradient-color buttons */
+.btn.gradient-color:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled state for gradient-color buttons */
+.btn.gradient-color:disabled {
+  background-image: linear-gradient(to right, #6c757d, #6c757d);
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Remove border-radius from header and footer elements */
+.navbar.gradient-color,
+footer.gradient-color,
+.nav-background,
+.footer-background {
+  border-radius: 0 !important;
+}
+
+/* Ensure full width for header and footer */
+.navbar,
+footer {
+  width: 100% !important;
+  margin: 0 !important;
+}
+/* Ensure main app container doesn't overflow */
+#root, app-root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Global responsive utilities */
+.animate-on-hover:hover {
+  animation: pulse 0.5s;
+}
+
+/* Responsive text scaling using clamp for fluid typography */
+.responsive-text {
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+}
+
+.responsive-heading {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
+/* Smooth transitions for better UX */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Ensure images are responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom responsive breakpoint utilities */
+@media (max-width: 575.98px) {
+  .btn-responsive {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .container-responsive {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .btn-responsive {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-responsive {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Responsive spacing utilities */
+.py-responsive {
+  padding-top: clamp(1rem, 3vw, 3rem);
+  padding-bottom: clamp(1rem, 3vw, 3rem);
+}
+
+.px-responsive {
+  padding-left: clamp(0.5rem, 2vw, 2rem);
+  padding-right: clamp(0.5rem, 2vw, 2rem);
+}
+
+/* Touch-friendly interactive elements */
+@media (hover: none) and (pointer: coarse) {
+  .btn, .nav-link, .card {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

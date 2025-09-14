@@ -1,0 +1,90 @@
+<div class="music-container">
+  <!-- Header Section -->
+  <div class="music-header">
+    <div class="container">
+      <div class="music-header-content">
+        <h2 class="music-title">EchoVerse Music Library</h2>
+        <div class="music-actions" *ngIf="isAuthenticated()">
+          <button class="btn btn-gradient" (click)="showSearchMusicForm()">
+            <i class="bi bi-search me-2"></i>
+            Search Music
+          </button>
+          <button class="btn btn-gradient" (click)="showCreateMusicForm()">
+            <i class="bi bi-plus-circle me-2"></i>
+            Add New Music
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Authentication Check -->
+    <div *ngIf="!isAuthenticated()" class="row">
+      <div class="col-12">
+        <div class="alert alert-custom alert-warning text-center">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          Please log in to access the music library features.
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div *ngIf="isAuthenticated()">
+
+      <!-- Search Component -->
+      <div class="search-section" *ngIf="showSearchForm">
+        <app-music-search
+          (searchSubmitted)="onSearchSubmitted($any($event))"
+          (searchCancelled)="onSearchCancelled()"
+          (formClosed)="onSearchFormClosed()">
+        </app-music-search>
+      </div>
+
+      <!-- Error Alert -->
+      <div *ngIf="error" class="alert alert-custom alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ error }}
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p class="mt-3 text-muted">Loading your music collection...</p>
+      </div>
+
+     <!-- Create Music Form -->
+<div class="form-section mt-3" *ngIf="showCreateForm">
+  <h3 class="h5 mb-3">Add New Music</h3>
+
+  <app-music-create
+    [loading]="loading"
+    (musicCreated)="onMusicCreated($event)"
+    (formClosed)="onCreateFormClosed()">
+  </app-music-create>
+</div>
+
+      <!-- Edit Music Form -->
+      <div class="form-section" *ngIf="showEditForm">
+        <h3>Edit Music</h3>
+        <app-music-edit
+          [showEditForm]="showEditForm"
+          [musicToEdit]="selectedTrack"
+          (musicUpdated)="onMusicUpdated($event)"
+          (formClosed)="onEditFormClosed()">
+        </app-music-edit>
+      </div>
+
+     <!-- Music List -->
+<div class="music-card">
+  <app-music-list
+    [musics]="musicTracks"
+    [loading]="loading"
+    (editMusic)="onEditMusic($event)"
+    (deleteMusicEvent)="onMusicDeleted($event)">
+  </app-music-list>
+</div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+/* Ensure navbar brand text scales well */
+
+.navbar {
+  background:linear-gradient(135deg, #064181 0%, #4f6985 100%);
+}
+
+.username-greeting {
+  color: white;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+/* Space between the buttons on all the screen sizes */
+.nav-item button {
+  min-width: 80px;
+}
+
+/* for responsiveness for different screen sizes */
+@media (max-width: 576px) {
+  .nav-item {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-item button {
+    width: 100%;
+  }
+}

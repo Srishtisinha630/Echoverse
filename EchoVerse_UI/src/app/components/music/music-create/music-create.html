@@ -1,0 +1,36 @@
+<div class="card p-3">
+  <form (ngSubmit)="submitForm()" #musicForm="ngForm">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control" [(ngModel)]="formData.title" name="title" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Artist</label>
+      <input type="text" class="form-control" [(ngModel)]="formData.artist" name="artist" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Album</label>
+      <input type="text" class="form-control" [(ngModel)]="formData.album" name="album">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Release Year</label>
+      <input type="number" class="form-control" [(ngModel)]="formData.releaseYear" name="releaseYear">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <input type="text" class="form-control" [(ngModel)]="formData.category" name="category" required>
+    </div>
+
+    <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+
+    <button type="submit" class="btn btn-success me-2" [disabled]="isSubmitting">
+      <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-1"></span>
+      Create
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+  </form>
+</div>

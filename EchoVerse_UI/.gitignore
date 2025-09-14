@@ -1,0 +1,15 @@
+.vs/
+*.db
+*.sqlite
+*.user
+*.suo
+*.vsp
+
+# Ignore node_modules and Angular build
+EchoVerse_UI/node_modules/
+EchoVerse_UI/dist/
+
+# Ignore .NET build outputs
+Cts_Echoverse/bin/
+Cts_Echoverse/obj/
+Cts_Echoverse/.vs/

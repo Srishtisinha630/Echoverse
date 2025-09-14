@@ -1,0 +1,6 @@
+.vs/
+*.db
+*.sqlite
+*.user
+*.suo
+*.vsp

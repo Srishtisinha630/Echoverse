@@ -1,0 +1,62 @@
+<div class="card mb-4">
+  <div class="card-header gradient-color text-white">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">
+        <i class="bi bi-plus-circle me-2"></i>
+        Create New Genre
+      </h5>
+      <button
+        type="button"
+        class="btn btn-sm gradient-color text-white"
+        (click)="cancel()"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <form (ngSubmit)="createCategory()" #categoryForm="ngForm">
+      <div class="row">
+        <div class="col-md-8 mb-3">
+          <label for="categoryName" class="form-label">
+            Genre <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            id="categoryName"
+            name="categoryName"
+            [(ngModel)]="categoryName"
+            required
+            placeholder="Enter genre name"
+            #categoryNameField="ngModel"
+            class="form-control"
+            [class.is-invalid]="categoryNameField.invalid && categoryNameField.touched"
+          />
+          <div *ngIf="categoryNameField.invalid && categoryNameField.touched" class="invalid-feedback">
+            Genre is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button
+          type="submit"
+          class="btn gradient-color text-white"
+          [disabled]="categoryForm.invalid"
+        >
+          <i class="bi bi-check-circle me-2"></i>
+          Create
+        </button>
+        <button
+          type="button"
+          class="btn gradient-color text-white"
+          (click)="cancel()"
+        >
+          <i class="bi bi-x-circle me-2"></i>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

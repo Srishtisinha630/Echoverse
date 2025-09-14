@@ -1,0 +1,89 @@
+<div class="music-container">
+  <!-- Header Section -->
+  <div class="music-header">
+    <div class="container">
+      <div class="music-header-content">
+        <h2 class="music-title">EchoVerse Music Genre</h2>
+        <div class="music-actions" *ngIf="isAuthenticated()">
+          <button class="btn btn-gradient" (click)="showSearchCategoryForm()">
+            <i class="bi bi-search me-2"></i>
+            Search Genre
+          </button>
+          <button class="btn btn-gradient" (click)="showCreateCategoryForm()">
+            <i class="bi bi-plus-circle me-2"></i>
+            Add New Genre
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Authentication Check -->
+    <div *ngIf="!isAuthenticated()" class="row">
+      <div class="col-12">
+        <div class="alert alert-custom alert-warning text-center">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          Please log in to access the category management features.
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div *ngIf="isAuthenticated()">
+
+      <!-- Search Component -->
+      <div class="search-section" *ngIf="showSearchForm">
+        <app-category-search
+          (searchSubmitted)="onSearchSubmitted($any($event))"
+          (searchCancelled)="onSearchCancelled()"
+          (formClosed)="onSearchFormClosed()">
+        </app-category-search>
+      </div>
+
+      <!-- Error Alert -->
+      <div *ngIf="error" class="alert alert-custom alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ error }}
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p class="mt-3 text-muted">Loading Genres...</p>
+      </div>
+
+      <!-- Create Category Form -->
+      <div class="form-section" *ngIf="showCreateForm">
+        <!--<h3>Add New Genre</h3>-->
+        <app-category-create
+          [loading]="loading"
+          (categoryCreated)="onCategoryCreated($event)"
+          (formClosed)="onCreateFormClosed()">
+        </app-category-create>
+      </div>
+
+      <!-- Edit Genre Form -->
+<div class="form-section" *ngIf="showEditForm && selectedCategory">
+ <!-- <h3>Edit Genre</h3>-->
+  <app-category-edit
+    [category]="selectedCategory"
+    (categoryUpdated)="onCategoryUpdated($event)"
+    (formClosed)="onEditFormClosed()">
+  </app-category-edit>
+</div>
+
+<!-- Category List -->
+<div class="music-card">
+  <app-category-list
+    [categories]="categories"
+    (editCategory)="onEditCategory($event)"
+    (deleteCategoryEvent)="onCategoryDeleted($event)">
+  </app-category-list>
+</div>
+      <!-- No Categories Message -->
+      <div *ngIf="!loading && categories.length === 0" class="alert alert-custom alert-info text-center">
+        <i class="bi bi-info-circle me-2"></i>
+        No genres found. Please add a new genre to get started.
+  </div>
+</div>

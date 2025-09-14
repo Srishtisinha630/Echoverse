@@ -1,0 +1,79 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <h1 class="display-4 text-center mb-4">Contact Us</h1>
+      
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <p class="text-center text-muted mb-4">
+            We'd love to hear from you! Send us a message and we'll respond as soon as possible.
+          </p>
+          
+          <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                name="name" 
+                [(ngModel)]="contactForm.name"
+                required
+                placeholder="Enter your full name">
+            </div>
+            
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                name="email" 
+                [(ngModel)]="contactForm.email"
+                required
+                placeholder="Enter your email address">
+            </div>
+            
+            <div class="mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="subject" 
+                name="subject" 
+                [(ngModel)]="contactForm.subject"
+                required
+                placeholder="What's this about?">
+            </div>
+            
+            <div class="mb-4">
+              <label for="message" class="form-label">Message</label>
+              <textarea 
+                class="form-control" 
+                id="message" 
+                name="message" 
+                rows="5"
+                [(ngModel)]="contactForm.message"
+                required
+                placeholder="Tell us more..."></textarea>
+            </div>
+            
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="!contactFormRef.form.valid">
+                <i class="bi bi-send me-2"></i>Send Message
+              </button>
+            </div>
+          </form>
+          
+          <div class="mt-4 text-center">
+            <h5 class="h6">Other Ways to Reach Us</h5>
+            <p class="text-muted mb-0">
+              <i class="bi bi-envelope me-2"></i>support@echoverse.com<br>
+              <i class="bi bi-telephone me-2"></i>+1 (555) 123-4567
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

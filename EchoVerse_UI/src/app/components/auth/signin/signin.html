@@ -1,0 +1,370 @@
+<div
+  class="h-100 d-flex align-items-center justify-content-center bg-gradient"
+  style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-11 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+        <div
+          class="card shadow-lg border-0 rounded-4 animate__animated animate__fadeInUp"
+        >
+          <div class="card-body p-3 p-sm-4 p-md-5">
+            <!-- Header -->
+            <div class="text-center mb-3 mb-md-4">
+              <i
+                class="bi bi-music-note-beamed text-primary d-block"
+                style="font-size: clamp(2rem, 5vw, 3rem)"
+              ></i>
+              <h3 class="mt-2 mb-0 fs-4 fs-md-3">EchoVerse</h3>
+              <p class="text-muted mb-0 fs-6">Welcome back!</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <ul
+              class="nav nav-tabs nav-justified mb-4"
+              id="authTabs"
+              role="tablist"
+            >
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="signin-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#signin"
+                  type="button"
+                  role="tab"
+                  aria-controls="signin"
+                  aria-selected="true"
+                >
+                  <i class="bi bi-box-arrow-in-right me-1"></i>
+                  Sign In
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="register-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#register"
+                  type="button"
+                  role="tab"
+                  aria-controls="register"
+                  aria-selected="false"
+                >
+                  <i class="bi bi-person-plus me-1"></i>
+                  Register
+                </button>
+              </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="authTabContent">
+              <!-- Sign In Tab -->
+              <div
+                class="tab-pane fade show active"
+                id="signin"
+                role="tabpanel"
+                aria-labelledby="signin-tab"
+              >
+                <form #signinForm="ngForm" (ngSubmit)="onSignin()">
+                  <!-- Username Field -->
+                  <div class="mb-3">
+                    <label for="signinUsername" class="form-label">
+                      <i class="bi bi-person me-1"></i>Username
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="signinUsername"
+                      name="username"
+                      [(ngModel)]="signinModel.username"
+                      #usernameField="ngModel"
+                      required
+                      minlength="3"
+                      [class.is-invalid]="
+                        usernameField.invalid && usernameField.touched
+                      "
+                      placeholder="Enter your username"
+                    />
+                    <div
+                      class="invalid-feedback"
+                      *ngIf="usernameField.invalid && usernameField.touched"
+                    >
+                      <span *ngIf="usernameField.errors?.['required']"
+                        >Username is required</span
+                      >
+                      <span *ngIf="usernameField.errors?.['minlength']"
+                        >Username must be at least 3 characters</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Password Field -->
+                  <div class="mb-3">
+                    <label for="signinPassword" class="form-label">
+                      <i class="bi bi-lock me-1"></i>Password
+                    </label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="signinPassword"
+                      name="password"
+                      [(ngModel)]="signinModel.password"
+                      #passwordField="ngModel"
+                      required
+                      minlength="6"
+                      [class.is-invalid]="
+                        passwordField.invalid && passwordField.touched
+                      "
+                      placeholder="Enter your password"
+                    />
+                    <div
+                      class="invalid-feedback"
+                      *ngIf="passwordField.invalid && passwordField.touched"
+                    >
+                      <span *ngIf="passwordField.errors?.['required']"
+                        >Password is required</span
+                      >
+                      <span *ngIf="passwordField.errors?.['minlength']"
+                        >Password must be at least 6 characters</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Success Message -->
+                  <div
+                    class="alert alert-success d-flex align-items-center"
+                    *ngIf="signinSuccess"
+                  >
+                    <i class="bi bi-check-circle me-2"></i>
+                    {{ signinSuccess }}
+                  </div>
+
+                  <!-- Error Message -->
+                  <div
+                    class="alert alert-danger d-flex align-items-center"
+                    *ngIf="signinError"
+                  >
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    {{ signinError }}
+                  </div>
+
+                  <!-- Submit Button -->
+                  <button
+                    type="submit"
+                    class="btn gradient-color w-100"
+                    [disabled]="signinLoading"
+                  >
+                    <span
+                      *ngIf="signinLoading"
+                      class="spinner-border spinner-border-sm me-2"
+                      role="status"
+                    ></span>
+                    <i
+                      class="bi bi-box-arrow-in-right me-1"
+                      *ngIf="!signinLoading"
+                    ></i>
+                    {{ signinLoading ? "Signing In..." : "Sign In" }}
+                  </button>
+                  
+                  <!-- Register Link -->
+                  <div class="text-center mt-3">
+                    <p class="mb-0 text-muted">
+                      Not created an account yet? 
+                      <a 
+                        href="javascript:void(0)" 
+                        (click)="switchToRegister()"
+                        class="text-primary text-decoration-none fw-bold"
+                      >
+                        Click here to register
+                      </a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Register Tab -->
+              <div
+                class="tab-pane fade"
+                id="register"
+                role="tabpanel"
+                aria-labelledby="register-tab"
+              >
+                <form #registerForm="ngForm" (ngSubmit)="onRegister()">
+                  <!-- Username Field -->
+                  <div class="mb-3">
+                    <label for="registerUsername" class="form-label">
+                      <i class="bi bi-person me-1"></i>Username
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="registerUsername"
+                      name="regUsername"
+                      [(ngModel)]="registerModel.username"
+                      #regUsernameField="ngModel"
+                      required
+                      minlength="3"
+                      [class.is-invalid]="
+                        regUsernameField.invalid && regUsernameField.touched
+                      "
+                      placeholder="Choose a username"
+                    />
+                    <div
+                      class="invalid-feedback"
+                      *ngIf="
+                        regUsernameField.invalid && regUsernameField.touched
+                      "
+                    >
+                      <span *ngIf="regUsernameField.errors?.['required']"
+                        >Username is required</span
+                      >
+                      <span *ngIf="regUsernameField.errors?.['minlength']"
+                        >Username must be at least 3 characters</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Password Field -->
+                  <div class="mb-3">
+                    <label for="registerPassword" class="form-label">
+                      <i class="bi bi-lock me-1"></i>Password
+                    </label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="registerPassword"
+                      name="regPassword"
+                      [(ngModel)]="registerModel.password"
+                      #regPasswordField="ngModel"
+                      required
+                      minlength="6"
+                      [class.is-invalid]="
+                        regPasswordField.invalid && regPasswordField.touched
+                      "
+                      placeholder="Create a password"
+                    />
+                    <div
+                      class="invalid-feedback"
+                      *ngIf="
+                        regPasswordField.invalid && regPasswordField.touched
+                      "
+                    >
+                      <span *ngIf="regPasswordField.errors?.['required']"
+                        >Password is required</span
+                      >
+                      <span *ngIf="regPasswordField.errors?.['minlength']"
+                        >Password must be at least 6 characters</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Confirm Password Field -->
+                  <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">
+                      <i class="bi bi-lock-fill me-1"></i>Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      [(ngModel)]="registerModel.confirmPassword"
+                      #confirmPasswordField="ngModel"
+                      required
+                      [class.is-invalid]="
+                        (confirmPasswordField.invalid &&
+                          confirmPasswordField.touched) ||
+                        (!passwordsMatch() &&
+                          registerModel.confirmPassword.length > 0)
+                      "
+                      placeholder="Confirm your password"
+                    />
+                    <div
+                      class="invalid-feedback"
+                      *ngIf="
+                        (confirmPasswordField.invalid &&
+                          confirmPasswordField.touched) ||
+                        (!passwordsMatch() &&
+                          registerModel.confirmPassword.length > 0)
+                      "
+                    >
+                      <span *ngIf="confirmPasswordField.errors?.['required']"
+                        >Confirm password is required</span
+                      >
+                      <span
+                        *ngIf="
+                          !passwordsMatch() &&
+                          registerModel.confirmPassword.length > 0
+                        "
+                        >Passwords do not match</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Success Message -->
+                  <div
+                    class="alert alert-success d-flex align-items-center"
+                    *ngIf="registerSuccess"
+                  >
+                    <i class="bi bi-check-circle me-2"></i>
+                    {{ registerSuccess }}
+                  </div>
+
+                  <!-- Error Message -->
+                  <div
+                    class="alert alert-danger d-flex align-items-center"
+                    *ngIf="registerError"
+                  >
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    {{ registerError }}
+                  </div>
+
+                  <!-- Submit Button -->
+                  <button
+                    type="submit"
+                    class="btn gradient-color w-100"
+                    [disabled]="registerLoading"
+                  >
+                    <span
+                      *ngIf="registerLoading"
+                      class="spinner-border spinner-border-sm me-2"
+                      role="status"
+                    ></span>
+                    <i
+                      class="bi bi-person-plus me-1"
+                      *ngIf="!registerLoading"
+                    ></i>
+                    {{
+                      registerLoading ? "Creating Account..." : "Create Account"
+                    }}
+                  </button>
+                  
+                  <!-- Sign In Link -->
+                  <div class="text-center mt-3">
+                    <p class="mb-0 text-muted">
+                      Already have an account? 
+                      <a 
+                        href="javascript:void(0)" 
+                        (click)="switchToSignin()"
+                        class="text-primary text-decoration-none fw-bold"
+                      >
+                        Click here to sign in
+                      </a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center mt-4">
+              <small class="text-muted"> © 2025 Products App </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

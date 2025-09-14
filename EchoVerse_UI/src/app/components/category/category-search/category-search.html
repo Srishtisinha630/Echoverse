@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header gradient-color text-white">
+    <h5 class="mb-0">
+      <i class="bi bi-search me-2"></i>
+      Search Genres
+    </h5>
+  </div>
+
+  <div class="card-body">
+    <form (ngSubmit)="search()" #searchForm="ngForm">
+      <div class="row g-2 mb-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            id="searchName"
+            name="searchName"
+            [(ngModel)]="searchName"
+            placeholder="Enter genre"
+            required
+            #categoryNameField="ngModel"
+          />
+          <div *ngIf="categoryNameField.invalid && categoryNameField.touched" class="invalid-feedback d-block">
+            Genre is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!searchForm.valid"
+        >
+          <i class="bi bi-search me-2"></i> Search
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">
+          <i class="bi bi-x-circle me-2"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
